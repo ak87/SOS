@@ -9,11 +9,11 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="shortcut icon" href="../img/favicon.ico">
-	<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
-	<link rel="stylesheet" href="../css/style.css?v=2">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+	<link rel="stylesheet" href="/css/style.css?v=2">
 
-	<script src="../js/libs/modernizr-1.7.min.js"></script></head>
+	<script src="/js/libs/modernizr-1.7.min.js"></script></head>
 <body>
 	<div id="header-container">
 		<header class="wrapper">
@@ -29,21 +29,10 @@
 	</div>
 	<div id="main" class="wrapper">
 		<aside>
-			<div id="auth-form">
-				<h3>Auth!</h3>
-				<form>
-					<label>Email:
-						<input type="email" placeholder="foo@bar.com" />
-					</label>
-					<label>Password:
-						<input type="password" autofocus placeholder="Password"/>
-					</label>
-					<input type="submit" id="submit-button" />
-				</form>
-			</div>
-
+			<?php echo $rightsidebar ?>
 		</aside>
 		<article>
+			<?php echo $content ?>
 		</article>
 	</div>
 
@@ -54,7 +43,7 @@
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
-	<script src="../js/script.js"></script>
+	<script src="/js/script.js"></script>
 	<!--[if lt IE 7 ]>
 	<script src="js/libs/dd_belatedpng.js"></script>
 	<script> DD_belatedPNG.fix('img, .png_bg');</script>
