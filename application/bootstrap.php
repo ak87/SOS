@@ -94,6 +94,8 @@ Kohana::$log->attach(new Log_File(APPPATH.'logs'));
  */
 Kohana::$config->attach(new Config_File);
 
+Cookie::$salt = '!3d$^ST*H';
+
 /**
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
@@ -106,14 +108,22 @@ Kohana::modules(array(
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'email'        => MODPATH.'email',        // Email Module For Kohana 3.0
 	));
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+Route::set('admin', 'admin(<controller>(/<action>(/<id>)))')
+	->defaults(array(
+		'directory'  => 'admin',
+		'controller' => 'cmain',
+		'action'     => 'index',
+	));
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'cmain',
+		'controller' => 'index',
 		'action'     => 'index',
 	));
