@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Account extends Controller_Main_Cneedauth {
+class Controller_Account2 extends Controller_Main_Cneedauth {
 
 	public $template = "vaccount";
 

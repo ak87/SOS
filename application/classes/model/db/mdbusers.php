@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_Db_Mdbuser extends ORM
+class Model_Db_Mdbusers extends ORM
 {
 	protected $_table_name = 'users';
 
@@ -13,6 +13,11 @@ class Model_Db_Mdbuser extends ORM
 					array('not_empty'),
 					array('email'),
 					array(array($this, 'email_unique')),
+				),
+				'first_name' => array
+				(
+					array('not_empty'),
+					array('min_length', array(':value', 2)),
 				),
 			);
 	}

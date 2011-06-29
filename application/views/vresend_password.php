@@ -3,11 +3,14 @@
 	<?php echo $vhead ?>
 <body>
 	<div class="container_16">
-		<?php echo $vlogo ?>
-		<?php echo $vsignin ?>
+		<?php echo $vheader_logo ?>
+		<?php echo $vheader_signin ?>
 		<div class="clear"></div>
 
 		<?php echo $vresend_password_content ?>
+		<div class="clear"></div>
+
+		<?php echo $vlatest_news ?>
 		<div class="clear"></div>
 
 		<?php echo $vfooter ?>

@@ -3,8 +3,8 @@
 	<?php echo $vhead ?>
 <body>
 	<div class="container_16">
-		<?php echo $vlogo ?>
-		<?php echo $vaccount_menu ?>
+		<?php echo $vheader_logo ?>
+		<?php echo $vaccount_header_menu ?>
 		<div class="clear"></div>
 
 		<?php echo $vaccount_content ?>

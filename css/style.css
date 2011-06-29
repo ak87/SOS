@@ -9,7 +9,7 @@ strong {font-weight:900;}
 
 input {border: 1px solid #CEE1E8; padding:4px; float:left; background-color:#f7fbfa;}
 input:focus {border: 1px solid #AFCDD8; background-color: #EBF2F4;}
-.submit-button {color:#FFF; display:block; background-color:#6d8fb3; border:none;}
+.submit-button {color:#FFF; display:block; background-color:#6d8fb3; border:none; height:23px; padding:3px 4px 4px;}
 .submit-button:hover {background-color: #627aad;}
 .submit-button:active {position:relative; top:1px;}
 
@@ -22,28 +22,36 @@ input:focus {border: 1px solid #AFCDD8; background-color: #EBF2F4;}
 	.logo p a{color:#DAE1E8; font-size:38px;}
 	.logo p a:hover{text-decoration:none;}
 
-	.signin table {float:right; width:340px;}
-	.signin input {width:120px;}
-	.signin .submit-button {width:60px; height:23px; float:right;}
+	.header_signin table {float:right; width:340px;}
+	.header_signin input {width:120px;}
+	.header_signin .submit-button {width:60px; float:right; padding:4px;}
 
-	.signin .check {width:15px; margin:4px 3px 0 0;}
+	.header_signin .check {width:15px; margin:4px 3px 0 0;}
 
 .content {margin-top:50px;}
 	.content h1 {border:none;}
+	.content p {font-size:12px;}
 	.index p {font-size:14px;}
 	.index .textcenter {text-align:center;}
 
-	.signup table, 							.resend_password table {margin-top:8px; width:340px;}
-	.signup p, 								.resend_password p {font-size:12px;}
-	.signup input, 							.resend_password input {width:270px; margin:0 0 8px 0; float:right; font-size:12px;}
-	.signup .submit-button, 				.resend_password .submit-button {width:150px; height:23px; float:left; margin-left:5px;}
-	.signup .error, 						.resend_password .error{border:1px solid #e89b88; background-color:#ffefe8; margin-top:8px; }
-	.signup .error p, .signup .success p, 	.resend_password .error p, .resend_password .success p {padding:4px;}
-	.signup .success, 						.resend_password .success {border:1px solid #9f9; background-color:#dfd; margin-top:8px; }
+	/* singup - базовый стиль для content */
+	.signup table {margin-top:8px; width:340px;}
+	.signup p {font-size:12px;}
+	.signup input {width:270px; margin:0 0 8px 0; float:right; font-size:12px;}
+	.signup .submit-button {width:150px; float:right; margin-right:130px;}
+	.signup .error {border:1px solid #e89b88; background-color:#ffefe8; margin-top:8px; }
+	.signup .error p, .signup .success p {padding:4px;}
+	.signup .success {border:1px solid #9f9; background-color:#dfd; margin-top:8px; }
 
 	.resend_password {}
+	.reset_password table {width:400px;}
 
-.latest_news {margin-top:20px;}
+	.signin .check {width:15px; margin:0 3px 0 0; float:left;}
+	.signin .checkremember_me {width:150px; float:right; margin-right:130px; margin-bottom:8px;}
+	.signin .linkresendpassword {width:150px; float:right; margin-right:130px;}
+
+
+.latest_news {margin-top:50px;}
 	.latest_news p {border-bottom:1px solid #DAE1E8; background-color:#f7fbfa; padding:8px;}
 	.latest_news a {color:#515961;}
 

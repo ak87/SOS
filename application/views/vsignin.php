@@ -1,22 +1,20 @@
-		<div class="grid_6 header signin">
-			<form action="" method="post">
-				<table>
-					<tr>
-						<td><p>E-mail</p></td>
-						<td><p>Пароль</p></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="email" maxlength="127" value=""/></td>
-						<td><input type="password" name="password" maxlength="40" value="" /></td>
-						<td><input type="submit" name="submit_signin" class="submit-button" value="Войти"/></td>
-					</tr>
-					<tr>
+<!DOCTYPE html>
+<html lang="en">
+	<?php echo $vhead ?>
+<body>
+	<div class="container_16">
+		<?php echo $vheader_logo ?>
+		<?php echo $vsignin_header_menu ?>
+		<div class="clear"></div>
 
-						<td><input type="checkbox" name="remember_me" class="check" value="TRUE"/><p>Запомнить меня</p></td>
-						<td><p><a href="/resendpassword">Забыли пароль?</a></td>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-			</form>
-		</div>
+		<?php echo $vsignin_content ?>
+		<div class="clear"></div>
+
+		<?php echo $vlatest_news ?>
+		<div class="clear"></div>
+
+		<?php echo $vfooter ?>
+		<div class="clear"></div>
+	</div>
+</body>
+</html>

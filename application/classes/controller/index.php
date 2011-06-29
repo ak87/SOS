@@ -15,38 +15,41 @@ class Controller_Index extends Controller_Template {
 		}
 		else
 		{
-						//Пользователь неавторизован
-			if (isset($_POST['submit_signin']))
+
+//Пользователь неавторизован
+//submit_signin
+			if ($path = Kohana::find_file('classes', 'include/header_signin'))
 			{
-				$email = Arr::get($_POST, 'email', '');
-				$password = Arr::get($_POST, 'password', '');
-				$remember_me = Arr::get($_POST, 'remember_me', '');
-				if ($remember_me == "TRUE")	{$remember_me = TRUE;} else {$remember_me = "";}
-
-				if ($auth->login($email, $password, $remember_me))
-				{
-					//Значение сессии на редирект пользователя
-					$session = Session::instance();
-					$auth_redirect = $session->get('auth_redirect', '');
-					$session->delete('auth_redirect');
-
-					//Пользователь авторизован
-					Request::initial()->redirect($auth_redirect);
-				}
-				else
-				{
-					//Сделать редирект на сраницу авторизации
-					$data['error'] = '';
-				}
+				require $path;
 			}
 
 		}
 
+//submit_signup
+		if (isset($_POST['submit_signup']))
+		{
+			$first_name = Arr::get($_POST, 'first_name', '');
+			$last_name = Arr::get($_POST, 'last_name', '');
+			$email = Arr::get($_POST, 'email', '');
+			$password = Arr::get($_POST, 'password', '');
+
+			$signup = new Model_Msignup();
+			if ($signup->signup($first_name, $last_name, $email, $password, 1))
+			{
+				$data["signup_ok"] = "";
+			}
+			else
+			{
+				$data["errors"] = $signup->errors;
+			}
+		}
+
+
 		$this->template->vhead = View::factory('vhead');
-		$this->template->vlogo = View::factory('vlogo');
-		$this->template->vsignin = View::factory('vsignin');
+		$this->template->vheader_logo = View::factory('vheader_logo');
+		$this->template->vheader_signin = View::factory('vheader_signin');
 		$this->template->vindex_content = View::factory('vindex_content');
-		$this->template->vsignup = View::factory('vsignup');
+		$this->template->vcontent_signup = View::factory('vcontent_signup', $data);
 		$this->template->vlatest_news = View::factory('vlatest_news');
 		$this->template->vfooter = View::factory('vfooter');
 	}

@@ -3,12 +3,12 @@
 	<?php echo $vhead ?>
 <body>
 	<div class="container_16">
-		<?php echo $vlogo ?>
-		<?php echo $vsignin ?>
+		<?php echo $vheader_logo ?>
+		<?php echo $vheader_signin ?>
 		<div class="clear"></div>
 
 		<?php echo $vindex_content ?>
-		<?php echo $vsignup ?>
+		<?php echo $vcontent_signup ?>
 		<div class="clear"></div>
 
 		<?php echo $vlatest_news ?>

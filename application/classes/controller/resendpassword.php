@@ -8,17 +8,19 @@ class Controller_Resendpassword extends Controller_Main_Cfuncauth {
 	{
 		$data = array();
 
+//submit_signin
+		if ($path = Kohana::find_file('classes', 'include/header_signin'))
+		{
+			require $path;
+		}
 
-
-
+//submit_resend_password
 		if(isset($_POST['submit_resend_password']))
 		{
-
 			$email = Arr::get($_POST, 'email', '');
+			$mresendpassword = new Model_Mresendpassword();
 
-			$register = new Model_Mregister();
-
-			if($register->resendpassword($email))
+			if($mresendpassword->sendtoken($email))
 			{
 				$data["ok"] = "";
 			}
@@ -29,46 +31,63 @@ class Controller_Resendpassword extends Controller_Main_Cfuncauth {
 		}
 
 		$this->template->vhead = View::factory('vhead');
-		$this->template->vlogo = View::factory('vlogo');
-		$this->template->vsignin = View::factory('vsignin');
-		$this->template->vresend_password_content = View::factory('vresend_password_content');
+		$this->template->vheader_logo = View::factory('vheader_logo');
+		$this->template->vheader_signin = View::factory('vheader_signin');
+		$this->template->vresend_password_content = View::factory('vresend_password_content', $data);
+		$this->template->vlatest_news = View::factory('vlatest_news');
 		$this->template->vfooter = View::factory('vfooter');
 	}
 
 
-	public function action_passwordreset()
+	public function action_reset()
 	{
+
 		$data = array();
 		if (isset($_GET['id']) && isset($_GET['token']))
 		{
 			$id = Arr::get($_GET, 'id', '');
 			$token = Arr::get($_GET, 'token', '');
-			$register = new Model_Mregister();
-			if($register->checktoken($id,$token))
+			$mresendpassword = new Model_Mresendpassword();
+
+
+			if($mresendpassword->checktoken($id,$token))
 			{
-				$data["oktoken"] = "";
+				$usertemp = ORM::factory('db_mdbusers', array('id'=>$id));
+				$data["user_email"] = $usertemp->email;
 			}
 			else
 			{
-				$data["error"] = "";
+				$data["token_error"] = "";
 			}
-
-			if(isset($_POST['btnsubmit']))
+//submit_reset_password
+			if(isset($_POST['submit_reset_password']))
 			{
 				$password = Arr::get($_POST, 'password', '');
 				$password_confirm = Arr::get($_POST, 'password_confirm', '');
-				if($register->passwordupdate($id,$token,$password,$password_confirm))
+				if($mresendpassword->passwordupdate($id,$token,$password,$password_confirm))
 				{
-					$data["ok"] = "";
+					$data["update_ok"] = "";
 				}
 				else
 				{
-					$data["error"] = "";
+					$data["update_error"] = "";
 				}
 			}
 		}
-		$this->template->rightsidebar =  View::factory('vpasswordreset', $data);
-		$this->template->content = View::factory('vcontent');
+
+//submit_signin
+		if ($path = Kohana::find_file('classes', 'include/header_signin'))
+		{
+			require $path;
+		}
+
+
+		$this->template->vhead = View::factory('vhead');
+		$this->template->vheader_logo = View::factory('vheader_logo');
+		$this->template->vheader_signin = View::factory('vheader_signin');
+		$this->template->vresend_password_content = View::factory('vreset_password_content', $data);
+		$this->template->vlatest_news = View::factory('vlatest_news');
+		$this->template->vfooter = View::factory('vfooter');
 	 }
 
 }
