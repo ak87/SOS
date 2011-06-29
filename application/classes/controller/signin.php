@@ -64,6 +64,16 @@ class Controller_Signin extends Controller_Main_Cfuncauth {
 				$data["activation_error"] = "";
 			}
 		}
+		else
+		{
+			$data["activation_error"] = "";
+		}
+
+//submit_signin
+		if ($path = Kohana::find_file('classes', 'include/header_signin'))
+		{
+			require $path;
+		}
 
 		$this->template->vhead = View::factory('vhead');
 		$this->template->vheader_logo = View::factory('vheader_logo');
