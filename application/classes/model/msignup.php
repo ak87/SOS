@@ -10,13 +10,15 @@ class Model_Msignup
 
 		//Создание хеша пароля
 		$hpass = $useful->genhash($password);
-
+		$reg_time = getdate();
 		//Создаем пользователя
 		$user->first_name = $first_name;
 		$user->last_name = $last_name;
 		$user->username = $email;
 		$user->email = $email;
 		$user->password = $hpass;
+		$user->reg_time = $reg_time[0];
+
 
 		try
 		{

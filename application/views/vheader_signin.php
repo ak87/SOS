@@ -1,5 +1,5 @@
 		<div class="grid_6 header header_signin">
-			<form action="" method="post">
+			<form action="/signin" method="post">
 				<table>
 					<tr>
 						<td><p>E-mail</p></td>

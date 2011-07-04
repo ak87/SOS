@@ -8,13 +8,7 @@ class Controller_Resendpassword extends Controller_Main_Cfuncauth {
 	{
 		$data = array();
 
-//submit_signin
-		if ($path = Kohana::find_file('classes', 'include/header_signin'))
-		{
-			require $path;
-		}
-
-//submit_resend_password
+		//submit_resend_password
 		if(isset($_POST['submit_resend_password']))
 		{
 			$email = Arr::get($_POST, 'email', '');
@@ -47,9 +41,8 @@ class Controller_Resendpassword extends Controller_Main_Cfuncauth {
 		{
 			$id = Arr::get($_GET, 'id', '');
 			$token = Arr::get($_GET, 'token', '');
+
 			$mresendpassword = new Model_Mresendpassword();
-
-
 			if($mresendpassword->checktoken($id,$token))
 			{
 				$usertemp = ORM::factory('db_mdbusers', array('id'=>$id));
@@ -59,7 +52,8 @@ class Controller_Resendpassword extends Controller_Main_Cfuncauth {
 			{
 				$data["token_error"] = "";
 			}
-//submit_reset_password
+
+			//submit_reset_password
 			if(isset($_POST['submit_reset_password']))
 			{
 				$password = Arr::get($_POST, 'password', '');
@@ -73,12 +67,6 @@ class Controller_Resendpassword extends Controller_Main_Cfuncauth {
 					$data["update_error"] = "";
 				}
 			}
-		}
-
-//submit_signin
-		if ($path = Kohana::find_file('classes', 'include/header_signin'))
-		{
-			require $path;
 		}
 
 

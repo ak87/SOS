@@ -1,15 +1,7 @@
 		<div class="grid_6 content signup">
 			<h2>Регистрация</h2>
 
-			<? if (isset($signup_ok)) { ?>
-				<div class="success"><p>Вы успешно зарегистрировались! Вам отправленно письмо для подтверждения регистрации.</p></div>
-			<? } elseif (isset($errors)) { ?>
-				<? foreach($errors as $item) { ?>
-					<div class="error"><p><?=$item?></p></div>
-				<? } ?>
-			<? } ?>
-
-			<form action="" method="post">
+			<form action="/signup" method="post">
 				<table>
 					<tr>
 						<td><p>Имя:</p></td>

@@ -8,39 +8,48 @@ class Controller_Signin extends Controller_Main_Cfuncauth {
 	{
 		$data = array();
 		$data["email"] = "";
-		//Проверка Get параметров
-		if (isset($_GET['m']) || isset($_GET['email']))
+		$data["remember_me"] = "";
+
+		//submit_signin
+		if (isset($_POST['submit_signin']))
 		{
-			$m = Arr::get($_GET, 'm', '');
-			$email = Arr::get($_GET, 'email', '');
+			$email = Arr::get($_POST, 'email', '');
+			$password = Arr::get($_POST, 'password', '');
+			$remember_me = Arr::get($_POST, 'remember_me', '');
 
-			switch ($m)
+			$msignin = new Model_Msignin();
+			if ($msignin->signin($email, $password, $remember_me))
 			{
-				case 1:
-					$data["error_login_or_password"] = "";
-					break;
-				case 2:
-					$data["error_activation_user"] = "";
-					break;
+				//Авторизовались
+				//Выясняем на какую страницу изначально пришел пользователь
+				$session = Session::instance();
+				if ($session->get('auth_redirect', '') != '')
+				{
+					$auth_redirect = $session->get('auth_redirect', '');
+					$session->delete('auth_redirect');
+					Request::initial()->redirect($auth_redirect);
+				}
+				else
+				{
+					Request::initial()->redirect('account');
+				}
 			}
-
-			if(trim($email) != '')
+			else
 			{
+				//Неавторизирован
+				$data["errors"] = $msignin->errors;
 				$data["email"] = $email;
-			}
-		}
+				if ($remember_me == "TRUE")	{$remember_me = "checked";} else {$remember_me = "";}
+				$data["remember_me"] = $remember_me;
 
-//submit_signin
-		if ($path = Kohana::find_file('classes', 'include/header_signin'))
-		{
-			require $path;
+			}
 		}
 
 		$this->template->vhead = View::factory('vhead');
 		$this->template->vheader_logo = View::factory('vheader_logo');
 		$this->template->vsignin_header_menu = View::factory('vsignin_header_menu');
 		$this->template->vsignin_content = View::factory('vsignin_content', $data);
-		$this->template->vlatest_news = View::factory('vlatest_news');
+ 		$this->template->vlatest_news = View::factory('vlatest_news');
 		$this->template->vfooter = View::factory('vfooter');
 	}
 
@@ -49,6 +58,7 @@ class Controller_Signin extends Controller_Main_Cfuncauth {
 	{
 		$data = array();
 		$data["email"] = "";
+		$data["remember_me"] = "";
 
 		if (isset($_GET['id']) && isset($_GET['token']))
 		{
@@ -69,12 +79,6 @@ class Controller_Signin extends Controller_Main_Cfuncauth {
 			$data["activation_error"] = "";
 		}
 
-//submit_signin
-		if ($path = Kohana::find_file('classes', 'include/header_signin'))
-		{
-			require $path;
-		}
-
 		$this->template->vhead = View::factory('vhead');
 		$this->template->vheader_logo = View::factory('vheader_logo');
 		$this->template->vsignin_header_menu = View::factory('vsignin_header_menu');
@@ -88,6 +92,28 @@ class Controller_Signin extends Controller_Main_Cfuncauth {
 	{
 		$data = array();
 		$data["email"] = "";
+		$data["remember_me"] = "";
+
+		if (isset($_GET['email']))
+		{
+			$email = Arr::get($_GET, 'email', '');
+				
+			$activation = new Model_Mactivation();
+			if ($activation->repeatactivation($email))
+			{
+				$data["repeatactivation_on"] = "";
+				$data["email"] = $email;
+			}
+			else
+			{
+				$data["repeatactivation_error"] = "";
+			}
+		}
+		else
+		{
+			$data["repeatactivation_error"] = "";
+		}
+
 
 		$this->template->vhead = View::factory('vhead');
 		$this->template->vheader_logo = View::factory('vheader_logo');
